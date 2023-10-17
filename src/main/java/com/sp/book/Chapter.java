@@ -30,15 +30,14 @@ public class Chapter {
             return subChapterList.get(index);
         } else {
             // Handle the case where the index is out of bounds, for example, return null or throw an exception.
-            // You can choose the appropriate error handling strategy for your application.
             return null;
         }
     }
     public void print(){
         System.out.println("Chapter: " + this.name);
 
-        for(SubChapter sc:subChapterList){
-            sc.print();
+        for(SubChapter subChapter:subChapterList){
+            subChapter.print();
         }
     }
 

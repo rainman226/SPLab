@@ -23,21 +23,6 @@ public class SubChapter {
         this.tableList = new ArrayList<Table>();
     }
 
-    public void print(){
-        System.out.println("Subchapter: " + this.name);
-        for(Paragraph p:paragraphList){
-            p.print();
-        }
-
-        for(Image i:imageList){
-            i.print();
-        }
-
-        for(Table t:tableList){
-            t.print();
-        }
-    }
-
     public void createNewParagraph(String name) {
         paragraphList.add(new Paragraph(name));
     }
@@ -48,5 +33,20 @@ public class SubChapter {
 
     public void createNewTable(String name) {
         tableList.add(new Table(name));
+    }
+
+    public void print(){
+        System.out.println("Subchapter: " + this.name);
+        for(Paragraph paragraph:paragraphList){
+            paragraph.print();
+        }
+
+        for(Image image:imageList){
+            image.print();
+        }
+
+        for(Table table:tableList){
+            table.print();
+        }
     }
 }

@@ -41,12 +41,12 @@ public class Book {
 
     public void print(){
         System.out.println("Book: " + this.title);
-        for(Author a:authorList){
-            a.print();
+        for(Author author:authorList){
+            author.print();
         }
 
-        for(Chapter c:chapterList){
-            c.print();
+        for(Chapter chapter:chapterList){
+            chapter.print();
         }
     }
 }
