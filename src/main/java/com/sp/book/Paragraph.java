@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Paragraph {
+public class Paragraph implements Element{
     private String text;
 
     public void print() {

@@ -12,41 +12,29 @@ import java.util.List;
 @Data
 public class SubChapter {
     private String name;
-    private List<Image> imageList;
-    private List<Paragraph> paragraphList;
-    private List<Table> tableList;
-
+    private List<Element> elementList;
     public SubChapter(String name){
         this.name = name;
-        this.imageList = new ArrayList<Image>();
-        this.paragraphList = new ArrayList<Paragraph>();
-        this.tableList = new ArrayList<Table>();
+        this.elementList = new ArrayList<>();
     }
 
     public void createNewParagraph(String name) {
-        paragraphList.add(new Paragraph(name));
+        elementList.add(new Paragraph(name));
     }
 
     public void createNewImage(String name) {
-        imageList.add(new Image(name));
+        elementList.add(new Image(name));
     }
 
     public void createNewTable(String name) {
-        tableList.add(new Table(name));
+        elementList.add(new Table(name));
     }
 
     public void print(){
         System.out.println("Subchapter: " + this.name);
-        for(Paragraph paragraph:paragraphList){
-            paragraph.print();
-        }
 
-        for(Image image:imageList){
-            image.print();
-        }
-
-        for(Table table:tableList){
-            table.print();
+        for (Element element : elementList){
+            element.print();
         }
     }
 }
