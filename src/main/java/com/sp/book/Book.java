@@ -13,11 +13,11 @@ import java.util.List;
 public class Book {
     private String title;
     private List<Author> authorList;
-    private List<Chapter> chapterList;
+    private List<Element> elementList;
 
     public Book(String title) {
         this.title = title;
-        this.chapterList = new ArrayList<Chapter>(); // Initialize an empty chapter list
+        this.elementList = new ArrayList<Element>(); // Initialize an empty chapter list
         this.authorList = new ArrayList<Author>();
     }
 
@@ -25,18 +25,8 @@ public class Book {
         authorList.add(authorName);
     }
 
-    public int createChapter(String chapterTitle) {
-        Chapter newChapter = new Chapter(chapterTitle);
-        chapterList.add(newChapter);
-        return chapterList.indexOf(newChapter);
-    }
-
-    public Chapter getChapter(int index) {
-        if (index >= 0 && index < chapterList.size()) {
-            return chapterList.get(index);
-        } else {
-            return null;
-        }
+    public void addContent(Element element){
+        elementList.add(element);
     }
 
     public void print(){
@@ -45,8 +35,8 @@ public class Book {
             author.print();
         }
 
-        for(Chapter chapter:chapterList){
-            chapter.print();
+        for(Element element: elementList){
+            element.print();
         }
     }
 }
