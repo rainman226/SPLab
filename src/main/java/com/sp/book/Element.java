@@ -1,9 +1,27 @@
 package com.sp.book;
 
-public interface Element {
-    public void print();
+import java.util.ArrayList;
+import java.util.List;
 
-    public void add(Element element);
-    public void remove(Element element);
-    public Element get (int index);
+public abstract class Element {
+    protected List<Element> elementList;
+
+    public Element() {
+        this.elementList = new ArrayList<>();
+    }
+
+    public void add(Element element) {
+        elementList.add(element.clone());
+    }
+
+    public void remove(Element element) {
+        elementList.remove(element);
+    }
+
+    public Element get(int index) {
+        return elementList.get(index);
+    }
+
+    public abstract void print();
+    public abstract Element clone();
 }

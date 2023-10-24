@@ -7,18 +7,17 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class Book {
-    private String title;
+public class Book extends Section{
     private List<Author> authorList;
-    private List<Element> elementList;
 
     public Book(String title) {
-        this.title = title;
-        this.elementList = new ArrayList<Element>(); // Initialize an empty chapter list
+        super(title);
         this.authorList = new ArrayList<Author>();
+    }
+
+    public Book(Book other) {
+        super(other.title);
+        this.authorList = new ArrayList<>(other.authorList);
     }
 
     public void addAuthor(Author authorName){
