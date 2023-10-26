@@ -11,7 +11,7 @@ public abstract class Element {
     }
 
     public void add(Element element) {
-        elementList.add(element.clone());
+        elementList.add(element);
     }
 
     public void remove(Element element) {
