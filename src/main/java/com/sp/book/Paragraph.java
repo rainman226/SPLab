@@ -1,12 +1,13 @@
 package com.sp.book;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 public class Paragraph extends Element{
+    @Getter
     private String text;
-
+    @Setter
+    private AlignStrategy alignStrategy;
     public Paragraph(String text) {
         this.text = text;
     }
@@ -15,7 +16,9 @@ public class Paragraph extends Element{
     }
     @Override
     public void print() {
-        System.out.println("Paragraph: " + this.text);
+        if(alignStrategy != null)
+            alignStrategy.render(text);
+        else new AlignLeft().render(text);
     }
 
     @Override
