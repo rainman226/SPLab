@@ -25,7 +25,7 @@ public class RenderContentVisitor implements Visitor<Void> {
     @Override
     public Void visitSection(Section section) {
         System.out.println(section.getTitle());
-        for (Element element :
+        for (BaseElement element :
                 section.getElementList()) {
             element.accept(this);
         }

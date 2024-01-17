@@ -1,6 +1,6 @@
 package com.sp.helpers;
 
-import com.sp.helpers.filters.commands.Command;
+import com.sp.commands.Command;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

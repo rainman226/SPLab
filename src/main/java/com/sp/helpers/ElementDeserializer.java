@@ -9,7 +9,7 @@ import com.sp.book.*;
 
 import java.io.IOException;
 
-public class ElementDeserializer extends StdDeserializer<Element> {
+public class ElementDeserializer extends StdDeserializer<BaseElement> {
     public ElementDeserializer() {
         this(null);
     }
@@ -19,7 +19,7 @@ public class ElementDeserializer extends StdDeserializer<Element> {
     }
 
     @Override
-    public Element deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JacksonException {
+    public BaseElement deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JacksonException {
         JsonSerializer serializer = new JsonSerializer();
         JsonNode node = jp.getCodec().readTree(jp);
         String className = node.get("class").asText();

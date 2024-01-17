@@ -7,9 +7,15 @@ import lombok.NoArgsConstructor;
 
 import java.util.concurrent.TimeUnit;
 
-@Getter
-public class Image extends Element implements Visitee {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.Getter;
 
+@Entity
+public class Image extends BaseElement implements Visitee {
+
+    @Getter
     private String imageName;
 
     public Image() { imageName = ""; }
@@ -23,22 +29,22 @@ public class Image extends Element implements Visitee {
 
 
     @Override
-    public void add(Element e) {
+    public void add(BaseElement e) {
         throw new IllegalStateException("Cannot add an element");
     }
 
     @Override
-    public void remove(Element e) {
+    public void remove(BaseElement e) {
         throw new IllegalStateException("Cannot remove an element");
     }
 
     @Override
-    public Element get(int index) {
+    public BaseElement get(int index) {
         throw new IllegalStateException("Cannot get an element");
     }
 
     @Override
-    public Element clone() {
+    public BaseElement clone() {
         return new Image(this);
     }
 
@@ -47,4 +53,3 @@ public class Image extends Element implements Visitee {
         visitor.visitImage(this);
     }
 }
-

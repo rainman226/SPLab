@@ -1,5 +1,6 @@
 package com.sp.book;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -7,8 +8,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 
-@Getter
-public class Table extends Element  implements Visitee {
+@Entity
+@jakarta.persistence.Table(name = "ContentTable")
+public class Table extends BaseElement implements Visitee {
+
     @Getter
     private String title;
 
@@ -21,12 +24,11 @@ public class Table extends Element  implements Visitee {
     }
     public Table(Table other){
         this.title = other.title;
-        this.elementList = new ArrayList<>(other.elementList);
     }
 
 
     @Override
-    public Element clone() {
+    public BaseElement clone() {
         return new Table(this);
     }
 

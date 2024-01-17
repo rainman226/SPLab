@@ -2,12 +2,11 @@ package com.sp.book;
 
 import lombok.Getter;
 
-@Getter
-public class ImageProxy extends Element  implements Picture, Visitee{
+public class ImageProxy extends BaseElement implements Picture, Visitee {
     private Image realImage;
     private String url;
 
-    public ImageProxy(String url) {
+    public ImageProxy(String url){
         this.url = url;
     }
 
@@ -22,8 +21,10 @@ public class ImageProxy extends Element  implements Picture, Visitee{
         return realImage;
     }
 
+
+
     @Override
-    public Element clone() {
+    public BaseElement clone() {
         return null;
     }
 
