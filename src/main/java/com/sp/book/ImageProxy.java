@@ -1,6 +1,9 @@
 package com.sp.book;
 
-public class ImageProxy extends Element  implements Picture{
+import lombok.Getter;
+
+@Getter
+public class ImageProxy extends Element  implements Picture, Visitee{
     private Image realImage;
     private String url;
 
@@ -27,5 +30,10 @@ public class ImageProxy extends Element  implements Picture{
     @Override
     public Element clone() {
         return null;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitImageProxy(this);
     }
 }

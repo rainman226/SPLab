@@ -1,10 +1,13 @@
 package com.sp.book;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Section extends Element{
+@Getter
+public class Section extends Element  implements Visitee {
     protected String title;
 
     public Section(String title) {
@@ -28,5 +31,10 @@ public class Section extends Element{
     @Override
     public Element clone() {
         return new Section(this);
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitSection(this);
     }
 }
