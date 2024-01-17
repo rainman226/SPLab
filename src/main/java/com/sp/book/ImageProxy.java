@@ -23,11 +23,6 @@ public class ImageProxy extends Element  implements Picture, Visitee{
     }
 
     @Override
-    public void print() {
-        loadImage().print();
-    }
-
-    @Override
     public Element clone() {
         return null;
     }

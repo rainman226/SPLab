@@ -5,31 +5,31 @@ import com.sp.book.*;
 import java.util.List;
 
 public class BookSaveVisitor implements Visitor<Void> {
-    private final StringBuilder buildingJson = new StringBuilder();
-    private int paragraphLastIndex = 0;
-    private int sectionLastIndex = 0;
-    private int imageLastIndex = 0;
-    private int tableLastIndex = 0;
-    private int authorLastIndex = 0;
+    private StringBuilder buildingJson = new StringBuilder();
+
+    public void clearBuffer(){
+        buildingJson = new StringBuilder();
+    }
 
     @Override
     public Void visitBook(Book book) {
         String BookPropertiesTemplateJson = """
                 {
-                    "Book": {
                     "title": "%s",
-                    "Authors": [
+                    "class": "%s",
+                    "authorList": [
                 """;
-        buildingJson.append(String.format(BookPropertiesTemplateJson,book.getTitle()));
+        buildingJson.append(String.format(BookPropertiesTemplateJson,book.getTitle(), Book.class));
         for (Author author :
                 book.getAuthorList()) {
             author.accept(this);
         }
         buildingJson.append("]");
-        buildingJson.append(!book.getElementList().isEmpty() ? "," : "");
+        buildingJson.append(!book.getElementList().isEmpty() ? ",\n \"elementList\": [" : "");
         List<Element> books = book.getElementList();
         printChilds(books);
-        buildingJson.append("}\n}");
+        buildingJson.append(!book.getElementList().isEmpty() ? "]" : "");
+        buildingJson.append("}");
         return null;
     }
 
@@ -43,15 +43,18 @@ public class BookSaveVisitor implements Visitor<Void> {
     @Override
     public Void visitSection(Section section) {
         String sectionJsonTemplate = """
-                "Section %d": {
-                    "title": "%s"%s
+                {
+                    "title": "%s",
+                    "class": "%s"%s
                 """;
-        sectionLastIndex++;
-        String json = String.format(sectionJsonTemplate, sectionLastIndex,
-                section.getTitle(), !section.getElementList().isEmpty() ? ",": "");
+        String json = String.format(sectionJsonTemplate,
+                section.getTitle(), Section.class,
+                !section.getElementList().isEmpty() ? ", \"elementList\" : [ " : "");
         buildingJson.append(json);
         var sections = section.getElementList();
         printChilds(sections);
+        if(!section.getElementList().isEmpty())
+            buildingJson.append("]");
         buildingJson.append("}");
         return null;
     }
@@ -60,7 +63,7 @@ public class BookSaveVisitor implements Visitor<Void> {
     public Void visitTableOfContents(TableOfContents toc) {
         int pageCount = 1;
         String entryTemplate = "\"%s\":\"%s\"";
-        buildingJson.append("\"TableOfContent\" : {");
+        buildingJson.append("{");
         for (String entry :
                 toc.getEntries()) {
             if (entry != null)
@@ -74,12 +77,12 @@ public class BookSaveVisitor implements Visitor<Void> {
     @Override
     public Void visitParagraph(Paragraph paragraph) {
         String paragraphJsonTemplate = """
-                "Paragraph %d": {
-                    "text": "%s"
+                {
+                    "text": "%s",
+                    "class": "%s"
                 }
                 """;
-        paragraphLastIndex++;
-        buildingJson.append(String.format(paragraphJsonTemplate, paragraphLastIndex, paragraph.getText()));
+        buildingJson.append(String.format(paragraphJsonTemplate, paragraph.getText(), Paragraph.class));
         return null;
     }
 
@@ -92,40 +95,40 @@ public class BookSaveVisitor implements Visitor<Void> {
     @Override
     public Void visitImage(Image image) {
         String imageJsonTemplate = """
-                "Image %d": {
-                    "name": "%s"
+                {
+                    "imageName": "%s",
+                    "class": "%s"
                 }
                 """;
-        imageLastIndex++;
-        buildingJson.append(String.format(imageJsonTemplate, imageLastIndex, image.getImageName()));
+        buildingJson.append(String.format(imageJsonTemplate, image.getImageName(), Image.class));
         return null;
     }
 
     @Override
     public Void visitTable(Table table) {
         String tableJsonTemplate = """
-                "Table %d": {
-                    "title": "%s"
+                {
+                    "title": "%s",
+                    "class": "%s"
                 }
                 """;
-        tableLastIndex++;
-        buildingJson.append(String.format(tableJsonTemplate, tableLastIndex, table.getTitle()));
+        buildingJson.append(String.format(tableJsonTemplate, table.getTitle(), Table.class));
         return null;
     }
 
     public Void visitAuthor(Author author) {
         String authorJsonTemplate = """
-                "Author %d": {
-                    "Author": "%s"
+                {
+                    "authorList": "%s",
+                    "class": "%s"
                 }
                 """;
-        authorLastIndex++;
-        String json = String.format(authorJsonTemplate, authorLastIndex, author.getName());
+        String json = String.format(authorJsonTemplate, author.getName(), Author.class);
         buildingJson.append(json);
         return null;
     }
 
-    public String GetJson(){
+    public String getJson(){
         return buildingJson.toString();
     }
 }
