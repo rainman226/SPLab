@@ -9,9 +9,10 @@ import java.util.concurrent.TimeUnit;
 
 @Getter
 public class Image extends Element implements Visitee {
-    @Getter
+
     private String imageName;
 
+    public Image() { imageName = ""; }
     public Image(String imageName) {
         this.imageName = imageName;
     }
@@ -45,9 +46,5 @@ public class Image extends Element implements Visitee {
     public void accept(Visitor visitor) {
         visitor.visitImage(this);
     }
-    @Override
-    public void print(){
-        System.out.println("Image with name:" + this.imageName);
-    }
-
 }
+

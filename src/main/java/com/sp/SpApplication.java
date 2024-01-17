@@ -11,7 +11,8 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 public class SpApplication {
 
-	public static void main(String[] args) throws Exception{
+
+	public static void main(String[] args) {
 //		SpringApplication.run(DesignPatternsLab2023Application.class, args);
 		createTableOfContent();
 
@@ -42,7 +43,8 @@ public class SpApplication {
 //        tocUpdate.getToC().accept(new RenderContentVisitor());
 		BookSaveVisitor saveVisitor = new BookSaveVisitor();
 		b.accept(saveVisitor);
-		System.out.println(saveVisitor.GetJson());
+		System.out.println(saveVisitor.getJson());
 
 	}
+
 }

@@ -1,43 +1,31 @@
 package com.sp.book;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 @Getter
+@Setter
 public class Book extends Section  implements Visitee {
     private List<Author> authorList;
 
-    public Book(String title) {
-        super(title);
-        this.authorList = new ArrayList<Author>();
+    public Book(){
+        super("");
+        authorList = new ArrayList<>();
     }
 
-    public Book(Book other) {
+    public Book(String title) {
+        super(title);
+        authorList = new ArrayList<>();
+    }
+
+    public Book(Book other){
         super(other.title);
         this.authorList = new ArrayList<>(other.authorList);
     }
 
-    public void addAuthor(Author authorName){
-        authorList.add(authorName);
-    }
-
-    public void addContent(Element element){
-        elementList.add(element);
-    }
-
-    public void print(){
-        System.out.println("Book: " + this.title);
-        for(Author author:authorList){
-            author.print();
-        }
-
-        for(Element element: elementList){
-            element.print();
-        }
+    public void addAuthor(Author author) {
+        this.authorList.add(new Author(author));
     }
 
     @Override

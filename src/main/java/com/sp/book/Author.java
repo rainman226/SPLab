@@ -4,14 +4,28 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class Author  implements Visitee {
-    public String name;
+    private String name;
+    private String surname;
 
-    public void print(){
-        System.out.println("Author name: " + this.name);
+    public Author() {
+        name = "";
+        surname = "";
+    }
+
+    public Author(String name) {
+        this.name = name;
+    }
+
+    public Author(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public Author(Author author){
+        this.name = author.name;
+        this.surname = author.surname;
     }
 
     @Override

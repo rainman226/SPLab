@@ -1,32 +1,35 @@
 package com.sp.book;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Getter
+@Setter
 public class Section extends Element  implements Visitee {
     protected String title;
 
-    public Section(String title) {
-        this.title = title;
-        this.elementList = new ArrayList<>();
+    public Section() {
+        title = "";
+        elementList = new ArrayList<>();
     }
 
-    public Section(Section other) {
+    public Section(String title) {
+        this.title = title;
+        elementList = new ArrayList<>();
+    }
+
+    public Section(Section other){
         this.title = other.title;
         this.elementList = new ArrayList<>(other.elementList);
     }
-    @Override
-    public void print(){
-        System.out.println(title);
 
-        for(Element element : elementList) {
-            element.print();
-        }
-    }
+
+
+
 
     @Override
     public Element clone() {
