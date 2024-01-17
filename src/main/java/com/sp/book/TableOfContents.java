@@ -1,13 +1,19 @@
 package com.sp.book;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class TableOfContents extends Element implements Visitee {
+@Entity
+public class TableOfContents extends BaseElement implements Visitee {
 
+    @Transient
     private final List<String> entries;
 
     public TableOfContents(){
@@ -19,7 +25,7 @@ public class TableOfContents extends Element implements Visitee {
     }
 
     @Override
-    public Element clone() {
+    public BaseElement clone() {
         return new TableOfContents(this);
     }
 
@@ -29,7 +35,6 @@ public class TableOfContents extends Element implements Visitee {
     }
 
 
-    // add name if chapter/subchapter, adds null if paragraph, image, table
     public void addEntry(String entry){
         entries.add(entry);
     }

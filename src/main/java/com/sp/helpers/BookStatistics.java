@@ -22,7 +22,7 @@ public class BookStatistics implements Visitor<Void> {
 
     @Override
     public Void visitSection(Section section) {
-        for (Element element :
+        for (BaseElement element :
                 section.getElementList()) {
             element.accept(this);
         }

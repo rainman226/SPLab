@@ -1,11 +1,17 @@
 package com.sp.book;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.sun.jdi.PrimitiveValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.Getter;
 
-@Data
-public class Author  implements Visitee {
+@Entity
+public class Author implements Visitee {
+    @Id
+    @GeneratedValue
+    private Long id;
+    @Getter
     private String name;
     private String surname;
 

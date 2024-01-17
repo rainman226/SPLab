@@ -5,8 +5,15 @@ import com.sp.helpers.AlignStrategy;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-public class Paragraph extends Element implements Visitee {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.Getter;
+
+@Entity
+public class Paragraph extends BaseElement implements Visitee {
+
+    @Getter
     private String text;
 
     public Paragraph() { text = "";}
@@ -17,7 +24,7 @@ public class Paragraph extends Element implements Visitee {
 
 
     @Override
-    public Element clone() {
+    public BaseElement clone() {
         return new Paragraph(this);
     }
 
