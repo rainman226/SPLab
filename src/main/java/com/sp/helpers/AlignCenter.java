@@ -1,4 +1,4 @@
-package com.sp.book;
+package com.sp.helpers;
 
 public class AlignCenter implements AlignStrategy {
     @Override

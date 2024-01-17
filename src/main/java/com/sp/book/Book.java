@@ -2,12 +2,13 @@ package com.sp.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class Book extends Section{
+@Getter
+public class Book extends Section  implements Visitee {
     private List<Author> authorList;
 
     public Book(String title) {
@@ -38,4 +39,10 @@ public class Book extends Section{
             element.print();
         }
     }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitBook(this);
+    }
+
 }

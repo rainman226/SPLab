@@ -2,9 +2,11 @@ package com.sp.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-public class Table extends Element {
+@Getter
+public class Table extends Element  implements Visitee {
     private String title;
 
     public Table(String title) {
@@ -23,5 +25,10 @@ public class Table extends Element {
     @Override
     public Element clone() {
         return new Table(this);
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitTable(this);
     }
 }
