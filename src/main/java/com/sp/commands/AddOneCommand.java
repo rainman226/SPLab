@@ -3,10 +3,10 @@ package com.sp.commands;
 import com.sp.persistance.*;
 
 public class AddOneCommand<T> implements Command<T, T>{
-    private final CrudRepository<T, Integer> repository;
+    private final CrudRepository<T, Long> repository;
     private T commandContext;
 
-    public AddOneCommand(CrudRepository<T, Integer> repository) {
+    public AddOneCommand(CrudRepository<T, Long> repository) {
         this.repository = repository;
     }
     private AddOneCommand(AddOneCommand<T> aoc) {
@@ -25,8 +25,7 @@ public class AddOneCommand<T> implements Command<T, T>{
 
     @Override
     public T execute() {
-        repository.save(commandContext);
-        return commandContext;
+        return repository.save(commandContext);
     }
 
 

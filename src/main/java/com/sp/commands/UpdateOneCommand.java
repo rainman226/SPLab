@@ -3,43 +3,31 @@ package com.sp.commands;
 import com.sp.book.*;
 import com.sp.book.Repository;
 import com.sp.persistance.*;
-public class UpdateOneCommand<T> implements Command<T, MyPair<String, T>> {
-    private final CrudRepository<T, Integer> repository;
-    private MyPair<String, T> commandContext;
 
-    public UpdateOneCommand(CrudRepository<T, Integer> repository) {
+public class UpdateOneCommand<T> implements Command<T, MyPair<Long, T>> {
+    private final CrudRepository<T, Long> repository;
+    private  MyPair<Long, T> commandContext;
+
+    public UpdateOneCommand(CrudRepository<T, Long> repository) {
         this.repository = repository;
     }
-
     private UpdateOneCommand(UpdateOneCommand<T> uoc) {
         this.repository = uoc.repository;
         this.commandContext = uoc.commandContext;
     }
-
     @Override
-    public void setCommandContext(MyPair<String, T> o) {
+    public void setCommandContext( MyPair<Long, T> o) {
         commandContext = o;
     }
 
     @Override
-    public Command<T, MyPair<String, T>> getClone() {
+    public Command<T, MyPair<Long, T>> getClone() {
         return new UpdateOneCommand<>(this);
     }
 
     @Override
     public T execute() {
-        T existingEntity= repository
-                .findById(Integer.parseInt(commandContext.first));
-
-        if (existingEntity.getClass() == Book.class) {
-            Book updatingBook = (Book) commandContext.second;
-            ((Book) existingEntity).setTitle(updatingBook.getTitle());
-            ((Book) existingEntity).setAuthorList(updatingBook.getAuthorList());
-            ((Book) existingEntity).setElementList(updatingBook.getElementList());
-        }
-        repository.save(existingEntity);
-        return existingEntity;
+        return repository.update(commandContext.first, commandContext.second);
+//        return null;
     }
-
-
 }
