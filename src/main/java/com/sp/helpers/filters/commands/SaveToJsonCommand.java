@@ -11,7 +11,7 @@ import com.sp.helpers.*;
 
 import java.util.List;
 
-@Component
+//@Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class SaveToJsonCommand implements Command<String, Object> {
     private final JsonSerializer serializer;

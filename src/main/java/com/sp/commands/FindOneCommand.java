@@ -2,14 +2,17 @@ package com.sp.commands;
 
 import com.sp.book.Repository;
 import lombok.Setter;
+import com.sp.book.BaseElement;
 import com.sp.persistance.*;
 
-public class FindOneCommand<T> implements Command<T, String> {
-    private final CrudRepository<T, Integer> repository;
-    @Setter
-    private String commandContext;
+import java.util.List;
 
-    public FindOneCommand(CrudRepository<T, Integer> repository) {
+public class FindOneCommand<T> implements Command<T, Long> {
+    private final CrudRepository<T, Long> repository;
+    @Setter
+    private Long commandContext;
+
+    public FindOneCommand(CrudRepository<T, Long> repository) {
         this.repository = repository;
     }
     private FindOneCommand(FindOneCommand<T> foc) {
@@ -19,11 +22,11 @@ public class FindOneCommand<T> implements Command<T, String> {
 
     @Override
     public T execute() {
-        return repository.findById(Integer.parseInt(commandContext));
+        return repository.findById(commandContext);
     }
 
     @Override
-    public Command<T, String> getClone() {
+    public Command<T, Long> getClone() {
         return new FindOneCommand<>(this);
     }
 }
